@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+<body>
+    <section class="first-section">
+        <div class="top-section">
+            <div class="top-section-1">
+                <div class="main-balance">
+                    <img src="./images/dollar.png" alt="">
+                    <div class="main-balance-bg">
+                        <span class="digits" id="score" class="scores">0</span>
+                    </div>
+                </div>
+                <div class="level-badge">
+                    <img src="./images/medal.png" alt="">
+                    <div class="level-badge-bg">
+                        <span class="digits">Beginner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-section-2">
+                <div class="stars-section">
+                    <img src="./images/star-flat.png" alt="">
+                    <div class="stars-section-bg">
+                        <span class="digits" id="stars">80000</span>
+                    </div>
+                </div>
+                <div class="attempt-section">
+                    <img src="./images/clock.png" alt="">
+                    <div class="attempt-section-bg">
+                        <span class="digits">Att. <span id="attempts">6</span>/6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="activities-section">
+            <div class="extras">
+                <div class="store">
+                    <div class="store-bg">
+                        <img src="./images/store.png" alt="">
+                    </div>
+                </div>
+                <div class="awards">
+                    <div class="awards-bg">
+                        <img src="./images/cup.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-timer">
+                <div>Time Left <span id="timer">10</span>s</div>
+            </div>
+            <div class="settings">
+                <div class="settings-bg">
+                    <img src="./images/settings.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="second-section">
+        <div id="image-container"></div>
+    </section>
+
+    <section class="third-section">
+        <div class="bonus-section">
+            <div class="shuffel-bonus">
+                <div class="shuffel-bonus-bg" id="shuffel-bonus">
+                    <img src="./images/shuffle.png" alt="">
+                    <div class="shuffel-data-display-bg">
+                        <span class="shuffel-data-display" id="shuffel-bonus-display">3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-bonus" id="flipBouns">
+                <div class="flip-bonus-bg">
+                    <img src="./images/circular-arrow.png" alt="">
+                    <div class="flip-data-display-bg">
+                        <span class="flip-data-display" id="flipBonusCount">3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="start-btn" id="start-button"">
+                <img src="./images/start-dark.png" alt="">
+            </div>
+            <div class="freeze-bonus" id="freezer-btn">
+                <div class="freeze-bonus-bg">
+                    <img src="./images/freezer.png" alt="">
+                    <div class="freezer-data-display-bg">
+                        <span class="freezer-display" id="timeFreezerCount">3</span>
+                    </div>
+                </div>
+            </div>
+            <div class="attempt-bonus">
+                <div class="attempt-bonus-bg">
+                    <img src="./images/clock-blue.png" alt="">
+                    <div class="attempt-data-display-bg">
+                        <span class="attempt-display">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fourth-section"></section>
+
+    <!-- <section class="notification">
+    </section> -->
+    <div id="notification-bar" class="notification-bar hidden">
+        <span id="notification-message"></span>
+        <!-- <button id="notification-close" class="close-btn">&times;</button> -->
+    </div>
+    <!-- <button onclick="showNotification('Hello, this is a test notification!', 5000)">Show Notification</button> -->
+
+
+    <section class="pop-up-menus">
+        <div id="failMenu"  class="menu">
+            <button class="close-icon" id="closeMenuIconFail">&times;</button>
+            <div class="slide-menu-content">
+                <img src="./images/game-icons/frustrated.png" alt="">
+                <div class="fail-title">
+                    <h2>Oops!!</h2>
+                    <p>You where unable to add any coins to your collection</p>
+                </div>
+            </div>
+            <div class="slide-menu-actions-fail close">
+                <button class="fail-try">Try Agin!</button>
+            </div>        
+        </div>
+    
+        <div id="winMenu"  class="menu">
+            <button class="close-icon" id="closeMenuIconWin">&times;</button>
+            <div class="slide-menu-content">
+                <img src="./images/game-icons/star.png" alt="">
+                <div class="win-title">
+                    <h2>Congratulation!!</h2>
+                    <p>You just added <span id="current-score" class="scores">0</span> coins to your collection</p>
+                </div>
+            </div>
+            <div class="slide-menu-actions-win">
+                <button class="win-multiply" id="x2scoreBtn">Watch an ad to x2 your score</button>
+                <p class="infoAdsLeft">You have <span id="x2adLeft">10</span> ads left today</p>
+            </div>        
+        </div>
+
+       <div id="attemptExhaustedMenu"  class="menu">
+            <button class="close-icon" id="closeAttemptMenuIcon">&times;</button>
+            <div class="slide-menu-content">
+                <img src="./images/game-icons/sad.png" alt="">
+                <div class="attempt-title">
+                    <p>Attempts exhausted!</p>
+                    <p class="attemptCountdown"></p>
+                    <button class="watchAdAttempt" id="watchAdButton">Watch an Ad to Restore Attempts</button>
+                    <p class="infoAdsLeft">You have <span>10</span> ads left today</p>
+                    <button class="buyAttemptsStars" id="buyStarsButton">Buy attempt using stars</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
