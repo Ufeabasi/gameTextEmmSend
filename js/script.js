@@ -153,41 +153,6 @@ function startCountdown() {
     }, 1000);
 }
 
-function pauseTimerFor3Seconds() {
-    if (timerPaused) return; // Prevent multiple pauses
-    timerPaused = true; // Set pause flag
-    clearInterval(countdown); // Stop the timer
-
-    setTimeout(() => {
-        timerPaused = false; // Resume after 3 seconds
-        startCountdown(); // Restart the countdown
-    }, 3000);
-}
-
-function useTimeFreezer() {
-    if (timeLeft === 10) {
-        showNotification('Start the game to use this feature');
-        return;
-    }
-    if (!isFreezerCliked && timeFreezer > 0) {
-        showNotification('Can only use after 3 seconds');
-        return;
-    }
-    if (timeFreezer === 0) {
-        showNotification("Use stars to buy more Freezers");
-        return;
-    }
-
-    pauseTimerFor3Seconds(); // Pause the timer for 3 seconds
-    timeFreezer--;
-    timeFreezerCount.textContent = timeFreezer;
-
-    setTimeout(() => {
-        isFreezerCliked = true;
-        showNotification('Freezer enabled');
-    }, 3000);
-}
-
 
 
 function updateTimerDisplay() {
@@ -198,7 +163,7 @@ function resetTimer() {
    clearInterval(countdown);
    timerPaused = false; // Reset pause state
    timeLeft = 10;
-   updateTimerDisplay
+   updateTimerDisplay();
    startCountdown();
 }
 
@@ -399,12 +364,6 @@ function levelUp() {
        level = 'level3';
    } else if (totalScore >= levelScoreThresholds.level3) {
        showNotification("You've reached the final level!");
-    //    endGame();
-    //    matchedPairs = 0;
-    //    timeLeft = 10;
-    //    flippingDisabled = false;
-    //    clearInterval(countdown);
-    //    resetTimer();
        return;
    }
    initGame(level);
@@ -487,6 +446,46 @@ function flipCardBonus() {
 }
 
 
+
+
+
+function pauseTimerFor3Seconds() {
+    if (timerPaused) return; // Prevent multiple pauses
+    timerPaused = true; // Set pause flag
+    clearInterval(countdown); // Stop the timer
+
+    setTimeout(() => {
+        timerPaused = false; // Resume after 3 seconds
+        startCountdown(); // Restart the countdown
+    }, 3000);
+}
+
+function useTimeFreezer() {
+    if (timeLeft === 10) {
+        showNotification('Start the game to use this feature');
+        return;
+    }
+    if (!isFreezerCliked && timeFreezer > 0) {
+        showNotification('Can only use after 3 seconds');
+        return;
+    }
+    if (timeFreezer === 0) {
+        showNotification("Use stars to buy more Freezers");
+        return;
+    }
+
+    pauseTimerFor3Seconds(); // Pause the timer for 3 seconds
+    timeFreezer--;
+    timeFreezerCount.textContent = timeFreezer;
+
+    setTimeout(() => {
+        isFreezerCliked = true;
+        showNotification('Freezer enabled');
+    }, 3000);
+}
+
+
+
 function shuffleUnopenedCards() {
    if (shuffleBonusCount > 0) {
 
@@ -563,3 +562,115 @@ function enableButton(button) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+const marketplaceButton = document.getElementById('marketplace-button');
+const marketplace = document.getElementById('marketplace');
+const closeMarketplaceButton = document.getElementById('close-marketplace');
+const buyFlipCardButton = document.getElementById('buy-flip-card');
+const buyShuffleCardsButton = document.getElementById('buy-shuffle-cards');
+const buyTimeFreezerButton = document.getElementById('buy-time-freezer');
+
+const starsDisplay = document.getElementById('stars'); // Where we show stars count
+
+marketplaceButton.addEventListener('click', () => {
+    if (!gameStarted) { // If game is not in progress, open the marketplace
+        marketplace.style.display = 'flex';
+    }
+});
+
+closeMarketplaceButton.addEventListener('click', () => {
+    marketplace.style.display = 'none';
+});
+
+// Function to buy boosters
+function buyBooster(cost, type) {
+    if (stars >= cost) {
+        stars -= cost;
+        updateStarsDisplay();
+        if (type === 'flipCard') {
+            flipBonus++;
+            flipBonusCount.textContent = flipBonus;
+            showNotification('Flip Card Bonus purchased!');
+        } else if (type === 'shuffleCards') {
+            shuffleBonusCount++;
+            shuffleBonusDisplay.textContent = shuffleBonusCount;
+            showNotification('Shuffle Unopened Cards purchased!');
+        } else if (type === 'timeFreezer') {
+            timeFreezer++;
+            timeFreezerCount.textContent = timeFreezer;
+            showNotification('Time Freezer purchased!');
+        }
+    } else {
+        showNotification('Not enough stars!');
+    }
+}
+
+// Buy boosters on button click
+buyFlipCardButton.addEventListener('click', () => buyBooster(5, 'flipCard'));
+buyShuffleCardsButton.addEventListener('click', () => buyBooster(5, 'shuffleCards'));
+buyTimeFreezerButton.addEventListener('click', () => buyBooster(5, 'timeFreezer'));
+
+// Update stars display
+function updateStarsDisplay() {
+    starsDisplay.textContent = `Stars: ${stars}`;
+}
+
+
+
+
+
+// const flipCardBonusCost = 5;
+// const shuffleUnopenedCardsCost = 5;
+// const timeFreezerCost = 5;
+
+// // Update the display of stars
+// function updateStarsDisplay() {
+//     remainingStars.textContent = stars;
+//     document.getElementById("stars-display").textContent = stars;
+// }
+
+// // Handle buying boosters
+// document.getElementById("buy-flipcardbonus").addEventListener("click", () => {
+//     if (stars >= flipCardBonusCost) {
+//         stars -= flipCardBonusCost;
+//         flipBonus++;
+//         flipBonusCount.textContent = flipBonus;
+//         updateStarsDisplay();
+//         showNotification("You bought Flip Card Bonus!");
+//     } else {
+//         showNotification("Not enough stars!");
+//     }
+// });
+
+// document.getElementById("buy-shuffleUnopenedCards").addEventListener("click", () => {
+//     if (stars >= shuffleUnopenedCardsCost) {
+//         stars -= shuffleUnopenedCardsCost;
+//         shuffleBonusCount++;
+//         shuffleBonusDisplay.textContent = shuffleBonusCount;
+//         updateStarsDisplay();
+//         showNotification("You bought Shuffle Unopened Cards!");
+//     } else {
+//         showNotification("Not enough stars!");
+//     }
+// });
+
+// document.getElementById("buy-timeFreezer").addEventListener("click", () => {
+//     if (stars >= timeFreezerCost) {
+//         stars -= timeFreezerCost;
+//         timeFreezer++;
+//         timeFreezerCount.textContent = timeFreezer;
+//         updateStarsDisplay();
+//         showNotification("You bought Time Freezer!");
+//     } else {
+//         showNotification("Not enough stars!");
+//     }
+// });
