@@ -524,7 +524,7 @@ body .close-button {
 body .close-button:hover {
   background-color: #da190b;
 }
-body #marketplace-button {
+/* body #marketplace-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -534,7 +534,7 @@ body #marketplace-button {
   border: none;
   cursor: pointer;
   border-radius: 5px;
-}
-body #marketplace-button:hover {
+} */
+/* body #marketplace-button:hover {
   background-color: #007B9F;
-}/*# sourceMappingURL=index.css.map */
+} *//*# sourceMappingURL=index.css.map */
